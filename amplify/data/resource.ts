@@ -1,3 +1,4 @@
+//relative path: amplify/data/resource.ts
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
 /*== STEP 1 ===============================================================
@@ -7,11 +8,63 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  ConsentGiven: a
     .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
+      IsGiven: a.boolean(),
+    }).authorization((allow) => [allow.owner()]),
+
+    RaceTime: a
+    .model({
+      RaceDate: a.date(),
+      RaceDistance: a.integer(),
+      RaceMins: a.integer(),
+      RaceSecs: a.integer(),
+    }).authorization((allow) => [allow.owner()]),
+
+
+    TtTaskTimeBlock: a.model({
+      StartTime: a.datetime(),
+      EndTime: a.datetime(),
+      TtTaskId: a.id()
+    }).authorization(allow => [allow.owner()]),
+
+    TtTask: a.model({
+      ProjectName: a.string(),
+      TaskName: a.string().required(),
+      IsRunning: a.boolean(),
+    }).authorization(allow => [allow.owner()]),
+
+    Tx: a.model({
+      TxDate: a.string(),
+      TxDateTime: a.datetime(),
+      TxDateDate: a.date(),
+      TxAmount: a.integer(),
+      TxType: a.string(),
+      TxCategory: a.string(),
+      TxDescription: a.string(),
+    }).authorization(allow => [allow.owner()]),
+
+    
+
+    Contact: a.model({
+      Email: a.string(),
+      Message: a.string(),
+    }).authorization(allow => [allow.owner()]),
+
+
+
+    Todo: a.model({
+      Name: a.string(),
+      IsCompleted: a.boolean(),
+    }).authorization(allow => [allow.owner()]),
+
+
+    ShoppingListItem: a.model({
+      Name: a.string(),
+      IsCompleted: a.boolean(),
+    }).authorization(allow => [allow.owner()]),
+
+
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,10 +72,9 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
+    // This tells the data client in your app (generateClient())
+    // to sign API requests with the user authentication token.
+    defaultAuthorizationMode: 'userPool',
   },
 });
 

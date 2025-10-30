@@ -39,24 +39,16 @@ export default function App() {
   }
 
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li onClick={() => deleteTodo(todo.id)} key={todo.id}>
-            {todo.content}
-          </li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-        <button onClick={signOut}>Sign out</button>
-    </main>
+  <main>
+    <div className="text-center mt-32 py-10 px-6">
+      <h1 className="text-4xl font-bold mt-0 mb-6">Paul Collins</h1>
+      <h3 className="text-2xl font-bold mb-4">IBM Data Engineer | Web Developer</h3>
+    </div>
+    <div className="text-center flex justify-center m-2">
+      <a href="https://github.com/severalpens" className="border mx-6 px-6 py-2.5 border-black rounded-md">Github</a>
+      <a href="https://www.youtube.com/channel/UCuFhL_mEedCp4FDpIrSS9gA" className="border mx-6 px-6 py-2.5 border-black rounded-md">Youtube</a>
+      <a href="https://www.linkedin.com/in/paul-collins-541b2053/" className="border mx-6 px-6 py-2.5 border-black rounded-md">LinkedIn</a>
+    </div>
+  </main>
   );
 }

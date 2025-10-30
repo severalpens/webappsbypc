@@ -1,4 +1,5 @@
-import type { Schema } from "../../../amplify/data/resource";
+import type { Schema } from "../../amplify/data/resource";
+import type * as Highcharts from "highcharts";
 
 function formatTooltipLabel(xValue: number, yValue: number) {
   const hours = Math.floor(yValue / 3600);
@@ -59,15 +60,7 @@ function chart1Options(raceTimes: Array<Schema["RaceTime"]["type"]>) {
         color: 'rgba(223, 83, 83, .9)',
         name: 'Trend Line'
       },
-    }],
-    tooltip: {
-      animation: false,
-      formatter: function (this: Highcharts.TooltipFormatterContextObject): string {
-        return formatTooltipLabel(this.x as number, this.y as number);
-      }
-      
-    }
-
+    }]
   };
   return chartOptions;
 }

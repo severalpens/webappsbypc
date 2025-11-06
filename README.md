@@ -7,7 +7,7 @@
     - Add auth and user login: https://docs.amplify.aws/react/start/quickstart/##6-implement-login-ui
     - Add per-user authorization: https://docs.amplify.aws/react/start/quickstart/##9-implement-per-user-authorization
     - Add forms: https://docs.amplify.aws/react/build-ui/formbuilder/
-        - npx ampx sandbox
+        - npx ampx sandbox --profile default
         - npx ampx generate forms
 - Deploy and verify
 

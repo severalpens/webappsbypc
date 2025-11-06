@@ -23,10 +23,8 @@ export default function RootLayout({
     
     <html lang="en">
       <body>      
-        <AuthenticatorWrapper>
           <Navbar/>
           {children}
-        </AuthenticatorWrapper>
       </body>
     </html>
       );

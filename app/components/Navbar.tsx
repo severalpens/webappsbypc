@@ -14,13 +14,8 @@ function Navbar() {
             </Link>
           </div>
           <div className="p-6">
-            <Link className="" href="/racetimes">
-              Race Times
-            </Link>
-          </div>
-          <div className="p-6">
-            <Link className="" href="/tttasks">
-              Task Timer
+            <Link className="" href="/todoList">
+              Todo List
             </Link>
           </div>
         </div>

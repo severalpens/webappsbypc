@@ -56,7 +56,11 @@ const schema = a.schema({
     Todo: a.model({
       Name: a.string(),
       IsCompleted: a.boolean(),
-    }).authorization(allow => [allow.publicApiKey()]),
+    }).authorization(allow => [allow.owner()]),
+
+    SongList: a.model({
+      Name: a.string(),
+    }).authorization(allow => [allow.owner()]),
 
 
     ShoppingListItem: a.model({
@@ -71,17 +75,17 @@ export type Schema = ClientSchema<typeof schema>;
 
 export const data = defineData({
   schema,
-  // authorizationModes: {
-  //   // This tells the data client in your app (generateClient())
-  //   // to sign API requests with the user authentication token.
-  //   defaultAuthorizationMode: 'userPool',
-  // },
-    authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
+  authorizationModes: {
+    // This tells the data client in your app (generateClient())
+    // to sign API requests with the user authentication token.
+    defaultAuthorizationMode: 'userPool',
   },
+  //   authorizationModes: {
+  //   defaultAuthorizationMode: "apiKey",
+  //   apiKeyAuthorizationMode: {
+  //     expiresInDays: 30,
+  //   },
+  // },
 });
 
 /*== STEP 2 ===============================================================

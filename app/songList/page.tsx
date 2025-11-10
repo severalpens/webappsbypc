@@ -15,7 +15,7 @@ export default function Page() {
   const [songs, setSongs] = useState<Array<Schema["SongList"]["type"]>>([]);
 
   function listSongs() {
-    client.models.Todo.observeQuery().subscribe({
+    client.models.SongList.observeQuery().subscribe({
       next: (data) => setSongs([...data.items]),
     });
   }
@@ -24,10 +24,13 @@ export default function Page() {
     listSongs();
   }, []);
 
-  function createSong() {
-    client.models.SongList.create({
+  async function createSong() {
+   const result = await client.models.SongList.create({
       Name: window.prompt("Todo content"),
     });
+    console.log("Created song:", result);
+    const newSongList = await client.models.SongList.list();
+    console.log("Updated song list:", newSongList);
   }
 
   return (

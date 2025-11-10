@@ -1,8 +1,13 @@
+"use client";
+
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
 
 
-function Navbar() {
 
+export default function Navbar() {
+
+  const { signOut } = useAuthenticator();
 
   return (
     <>
@@ -18,10 +23,19 @@ function Navbar() {
               Todo List
             </Link>
           </div>
+          <div className="p-6">
+            <Link className="" href="/songList">
+              Song List
+            </Link>
+          </div>
+          <div className="p-6">
+            <button onClick={signOut}>
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     </>
        );
 }
 
-export default Navbar;

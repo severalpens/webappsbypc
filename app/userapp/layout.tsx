@@ -1,10 +1,9 @@
 import React from "react";
 import { Amplify } from "aws-amplify";
-import "./app.css";
 import "@aws-amplify/ui-react/styles.css";
 import outputs from "@/amplify_outputs.json";
-import NavbarPublic from "./components/NavbarPublic";
-
+import Navbar from "./Navbar";
+import AuthenticatorWrapper from "../AuthenticatorWrapper"
 
 Amplify.configure(outputs);
 
@@ -17,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>      
-        <NavbarPublic />
+        <AuthenticatorWrapper>
+        <Navbar />
           {children}
+        </AuthenticatorWrapper>
       </body>
     </html>
   );

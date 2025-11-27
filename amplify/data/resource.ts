@@ -10,7 +10,16 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a.schema({
     SongList: a.model({
       Name: a.string(),
-    }).authorization(allow => [allow.owner()])
+    }).authorization(allow => [allow.owner()]),
+        
+    RaceTime: a
+    .model({
+      RaceDate: a.date(),
+      RaceDistance: a.integer(),
+      RaceMins: a.integer(),
+      RaceSecs: a.integer(),
+    }).authorization((allow) => [allow.owner()]),
+
 
 });
 

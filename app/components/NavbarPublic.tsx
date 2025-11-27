@@ -14,8 +14,8 @@ export default function NavbarPublic() {
             </Link>
           </div>
            <div className="p-6">
-            <Link className="" href="/userApps/songList">
-              Song List
+            <Link className="" href="/userApps/raceTimes">
+              Race Times
             </Link>
           </div>
         </div>

@@ -13,11 +13,6 @@ export default function NavbarPublic() {
               Home
             </Link>
           </div>
-          <div className="p-6">
-            <Link className="" href="/userapp/songList">
-              Song List
-            </Link>
-          </div>
         </div>
       </div>
     </>

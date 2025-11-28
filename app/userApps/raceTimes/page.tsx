@@ -40,12 +40,16 @@ export default function Page() {
   }, []);
 
   const seedRaceTimes = async () => {
-    const confirmSeedRaceTimes = window.confirm("Are you sure you want to seed race times?");
-    if (confirmSeedRaceTimes) {
-      raceTimesSeedData.forEach(async (raceTime: { RaceDistance: number; RaceDate: string; RaceMins: number; RaceSecs: number; }) => {
-        await client.models.RaceTime.create(raceTime);
+    for (const raceTime of raceTimesSeedData) {
+      const res = await client.models.RaceTime.create({
+        RaceDate: raceTime.RaceDate,
+        RaceDistance: raceTime.RaceDistance,
+        RaceMins: raceTime.RaceMins,
+        RaceSecs: raceTime.RaceSecs,
       });
+      console.log(res);
     }
+
   }
 
   function deleteAllRaceTimes() {

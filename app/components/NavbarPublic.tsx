@@ -18,6 +18,11 @@ export default function NavbarPublic() {
               Race Times
             </Link>
           </div>
+           <div className="p-6">
+            <Link className="" href="/userApps/ttTasks">
+              Task Tracker
+            </Link>
+          </div>
         </div>
       </div>
     </>

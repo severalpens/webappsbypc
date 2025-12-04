@@ -20,6 +20,20 @@ const schema = a.schema({
       RaceSecs: a.integer(),
     }).authorization((allow) => [allow.owner()]),
 
+    
+    TtTaskTimeBlock: a.model({
+      StartTime: a.datetime(),
+      EndTime: a.datetime(),
+      TtTaskId: a.id()
+    }).authorization(allow => [allow.owner()]),
+
+    TtTask: a.model({
+      ProjectName: a.string(),
+      TaskName: a.string().required(),
+      IsRunning: a.boolean(),
+    }).authorization(allow => [allow.owner()]),
+
+
 
 });
 

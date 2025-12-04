@@ -3,7 +3,7 @@ import type { Schema } from "../../../amplify/data/resource";
 import '@aws-amplify/ui-react/styles.css';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import chart1Options from "./chart1Options.tsx";
+import chart1Options from "./chart1Options";
 
 
 function TtTasksChart1({ ttTaskTimeBlocks, ttTasks }: { ttTaskTimeBlocks: Array<Schema["TtTaskTimeBlock"]["type"]>, ttTasks: Array<Schema["TtTask"]["type"]> }) {

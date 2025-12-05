@@ -3,7 +3,7 @@ import type { Schema } from "../../../amplify/data/resource";
 
 
 function chart1Options(ttTaskTimeBlocks: Array<Schema["TtTaskTimeBlock"]["type"]>, ttTasks: Array<Schema["TtTask"]["type"]>) {
-    const distinctTaskIds = [...new Set(ttTaskTimeBlocks.map(ttTaskTimeBlock => ttTaskTimeBlock.TtTaskId))];
+    const distinctTaskIds = Array.from(new Set(ttTaskTimeBlocks.map(ttTaskTimeBlock => ttTaskTimeBlock.TtTaskId)));
     const correspondingTaskNames = distinctTaskIds.map(taskId => {
         const task = ttTasks.find(ttTask => ttTask.id === taskId);
         return task?.TaskName ?? 'Unknown';

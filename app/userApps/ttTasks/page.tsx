@@ -76,7 +76,7 @@ function Page() {
   }
 
   return (
-    <main>
+    <main className="container mx-auto p-4">
       <h1 className="text-xl mb-4">Task Timer (Prototype)</h1>
       <div id="newTimeForm" className="mb-12">
         <button

@@ -23,6 +23,12 @@ export default function NavbarPublic() {
               Task Tracker
             </Link>
           </div>
+                     <div className="p-6">
+            <Link className="" href="/publicApps/bindecHeroku">
+              Binary to Decimal
+            </Link>
+          </div>
+
         </div>
       </div>
     </>

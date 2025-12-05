@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Binary to Decimal game styles */
+.success {
+  background-color: #d4edda !important;
+  border-color: #28a745 !important;
+}
+
+.failure {
+  background-color: #f8d7da !important;
+  border-color: #dc3545 !important;
+}

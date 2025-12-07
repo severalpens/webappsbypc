@@ -8,29 +8,30 @@ import outputs from "@/amplify_outputs.json";
 import { useRef } from "react";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
-import chart1Options  from "../raceTimes/chart1Options";
-import RaceTimeCreateForm from '../../ui-components/RaceTimeCreateForm';
-import raceTimesSeedData from './raceTimesSeedData.json';
-
+import chart1Options from "../raceTimes/chart1Options";
+import RaceTimeCreateForm from "../../ui-components/RaceTimeCreateForm";
+import raceTimesSeedData from "./raceTimesSeedData.json";
 
 Amplify.configure(outputs);
-
 
 const client = generateClient<Schema>();
 
 export default function Page() {
-  const [songs, setSongs] = useState<Array<Schema["SongList"]["type"]>>([]);
-  const [raceTimes, setRaceTimes] = useState<Array<Schema["RaceTime"]["type"]>>([]);
+  const [raceTimes, setRaceTimes] = useState<Array<Schema["RaceTime"]["type"]>>(
+    []
+  );
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [showTable, setShowTable] = useState<boolean>(true);
   const [showChart, setShowChart] = useState<boolean>(true);
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
-  const [selectedRaceTimeIDs, setSelectedRaceTimeIDs] = useState<Array<string>>([]);
+  const [selectedRaceTimeIDs, setSelectedRaceTimeIDs] = useState<Array<string>>(
+    []
+  );
   const chartOptions = chart1Options(raceTimes);
   const [toggleSort, setToggleSort] = useState<boolean>(false);
 
-    useEffect(() => {
+  useEffect(() => {
     const sub = client.models.RaceTime.observeQuery().subscribe({
       next: ({ items }) => {
         setRaceTimes([...items]);
@@ -49,8 +50,7 @@ export default function Page() {
       });
       console.log(res);
     }
-
-  }
+  };
 
   function deleteAllRaceTimes() {
     selectedRaceTimeIDs.forEach(async (id) => {
@@ -59,7 +59,6 @@ export default function Page() {
     setSelectedRaceTimeIDs([]);
     setIsAllSelected(false);
   }
-
 
   const toggleShowTable = () => {
     setShowTable(!showTable);
@@ -73,141 +72,150 @@ export default function Page() {
     setToggleSort(!toggleSort);
   };
 
-
-  function listSongs() {
-    client.models.SongList.observeQuery().subscribe({
-      next: (data) => setSongs([...data.items]),
-    });
-  }
-
-  useEffect(() => {
-    listSongs();
-  }, []);
-
-  async function createSong() {
-   const result = await client.models.SongList.create({
-      Name: window.prompt("Todo content"),
-    });
-    console.log("Created song:", result);
-    const newSongList = await client.models.SongList.list();
-    console.log("Updated song list:", newSongList);
-  }
-
   return (
-        <main className="container mx-auto p-4">
-          <section>
-          <h1 className="text-xl mb-4">Race Times (Prototype)</h1>
-          <div id="newTimeForm" className="mb-12">
+    <main className="container mx-auto p-4">
+      <section>
+        <h1 className="text-xl mb-4">Race Times (Prototype)</h1>
+        <div id="newTimeForm" className="mb-12">
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
+          >
+            {showForm ? "Hide New Time Form" : "Add New Time"}
+          </button>
+          {showForm && <RaceTimeCreateForm />}
+        </div>
+        <button
+          onClick={toggleShowTable}
+          className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
+        >
+          {showTable ? "Hide Table" : "Show Table"}
+        </button>
+        <div hidden={!showTable}>
+          <div className="flex justify-end mb-4">
             <button
-              onClick={() => setShowForm(!showForm)}
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
+              id="sortTable"
+              onClick={toggleSortFunc}
+              className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm mr-4"
             >
-              {showForm ? 'Hide New Time Form' : 'Add New Time'}
+              Sort
             </button>
-            {showForm && <RaceTimeCreateForm />}
+            <button
+              id="seedRaceTimes"
+              onClick={seedRaceTimes}
+              className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm mr-4"
+            >
+              Seed Race Times
+            </button>
+            <button
+              id="deleteSelectedButton"
+              onClick={() => deleteAllRaceTimes()}
+              className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm"
+              disabled={selectedRaceTimeIDs.length === 0}
+            >
+              Delete Selected
+            </button>
           </div>
-            <button
-              onClick={toggleShowTable}
-              className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
-            >
-              {showTable ? 'Hide Table' : 'Show Table'}
-            </button>
-            <div hidden={!showTable}>
-              <div className="flex justify-end mb-4">
-              <button id="sortTable" onClick={toggleSortFunc} className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm mr-4">
-                  Sort
-                </button>
-                <button id="seedRaceTimes" onClick={seedRaceTimes} className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm mr-4">
-                  Seed Race Times
-                </button>
-                <button id="deleteSelectedButton"
-                  onClick={() => deleteAllRaceTimes()}
-                  className="bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300 text-white  px-4 rounded text-sm"
-                  disabled={selectedRaceTimeIDs.length === 0}
-                >
-                  Delete Selected
-                </button>
-              </div>
-              <div className="overflow-x-auto">
-                <table  id="raceTimesTable" className="table-auto w-full" >
-                  <thead>
-                    <tr>
-                      <th className="border px-4 py-2">Race Distance</th>
-                      <th className="border px-4 py-2">Race Date</th>
-                      <th className="border px-4 py-2">Race Time</th>
-                      <th className="border px-4 py-2">
+          <div className="overflow-x-auto">
+            <table id="raceTimesTable" className="table-auto w-full">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Race Distance</th>
+                  <th className="border px-4 py-2">Race Date</th>
+                  <th className="border px-4 py-2">Race Time</th>
+                  <th className="border px-4 py-2">
+                    <input
+                      className="mr-2"
+                      type="checkbox"
+                      checked={isAllSelected}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedRaceTimeIDs(
+                            raceTimes.map((raceTime) => raceTime.id)
+                          );
+                          setIsAllSelected(true);
+                        } else {
+                          setSelectedRaceTimeIDs([]);
+                          setIsAllSelected(false);
+                        }
+                      }}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {raceTimes
+                  .sort((a, b) => {
+                    const dateA = a.RaceDate
+                      ? new Date(a.RaceDate.toString())
+                      : null;
+                    const dateB = b.RaceDate
+                      ? new Date(b.RaceDate.toString())
+                      : null;
+                    return toggleSort
+                      ? dateA && dateB
+                        ? dateA.getTime() - dateB.getTime()
+                        : 0
+                      : dateA && dateB
+                      ? dateB.getTime() - dateA.getTime()
+                      : 0;
+                  })
+                  .map((raceTime) => (
+                    <tr key={raceTime.id}>
+                      <td className="border px-4 py-2">
+                        {raceTime.RaceDistance}
+                      </td>
+                      <td className="border px-4 py-2">{raceTime.RaceDate}</td>
+                      <td className="border px-4 py-2">
+                        {raceTime.RaceMins}:
+                        {raceTime.RaceSecs != null
+                          ? raceTime.RaceSecs < 10
+                            ? `0${raceTime.RaceSecs}`
+                            : raceTime.RaceSecs
+                          : 0}
+                      </td>
+                      <td className="border px-4 py-2">
                         <input
-                          className="mr-2"
                           type="checkbox"
-                          checked={isAllSelected}
                           onChange={(e) => {
                             if (e.target.checked) {
-                              setSelectedRaceTimeIDs(raceTimes.map(raceTime => raceTime.id));
-                              setIsAllSelected(true);
+                              setSelectedRaceTimeIDs([
+                                ...selectedRaceTimeIDs,
+                                raceTime.id,
+                              ]);
                             } else {
-                              setSelectedRaceTimeIDs([]);
-                              setIsAllSelected(false);
+                              setSelectedRaceTimeIDs(
+                                selectedRaceTimeIDs.filter(
+                                  (id) => id !== raceTime.id
+                                )
+                              );
                             }
                           }}
+                          checked={selectedRaceTimeIDs.includes(raceTime.id)}
                         />
-                      </th>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {raceTimes
-                      .sort((a, b) => {
-                        const dateA = a.RaceDate ? new Date(a.RaceDate.toString()) : null;
-                        const dateB = b.RaceDate ? new Date(b.RaceDate.toString()) : null;
-                        return toggleSort ? dateA && dateB ? dateA.getTime() - dateB.getTime() : 0 : dateA && dateB ? dateB.getTime() - dateA.getTime() : 0;
-                      })
-                      .map((raceTime) => (
-                        <tr key={raceTime.id}>
-                          <td className="border px-4 py-2">{raceTime.RaceDistance}</td>
-                          <td className="border px-4 py-2">{raceTime.RaceDate}</td>
-                          <td className="border px-4 py-2">
-                            {raceTime.RaceMins}:
-                            {raceTime.RaceSecs != null
-                              ? raceTime.RaceSecs < 10
-                                ? `0${raceTime.RaceSecs}`
-                                : raceTime.RaceSecs
-                              : 0}
-                          </td>
-                          <td className="border px-4 py-2">
-                            <input
-                              type="checkbox"
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  setSelectedRaceTimeIDs([...selectedRaceTimeIDs, raceTime.id]);
-                                } else {
-                                  setSelectedRaceTimeIDs(selectedRaceTimeIDs.filter(id => id !== raceTime.id));
-                                }
-                              }}
-                              checked={selectedRaceTimeIDs.includes(raceTime.id)}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          <div className="mt-4" id="chart">
-            <button
-              onClick={toggleChart}
-              className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
-            >
-              {showChart ? 'Hide Chart' : 'Show Chart'}
-            </button>
-            {showChart && (
-              <HighchartsReact
-                highcharts={Highcharts}
-                options={chartOptions}
-                ref={chartComponentRef}
-              />
-            )}
+                  ))}
+              </tbody>
+            </table>
           </div>
-        </section>
-        </main>
-
-      );
+        </div>
+        <div className="mt-4" id="chart">
+          <button
+            onClick={toggleChart}
+            className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  w-48"
+          >
+            {showChart ? "Hide Chart" : "Show Chart"}
+          </button>
+          {showChart && (
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={chartOptions}
+              ref={chartComponentRef}
+            />
+          )}
+        </div>
+      </section>
+    </main>
+  );
 }

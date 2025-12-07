@@ -9,6 +9,7 @@ import TtTaskTimeBlocks from "./TtTaskTimeBlocks";
 import TtTasksChart1 from "./TtTasksChart1";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(outputs);
 
@@ -20,6 +21,7 @@ function Page() {
   const [ttTaskTimeBlocks, setTtTaskTimeBlocks] = useState<Array<Schema["TtTaskTimeBlock"]["type"]>>([]);
   const [ttTasks, setTtTasks] = useState<Array<Schema["TtTask"]["type"]>>([]);
   const [isButtonsDisabled, setIsButtonsDisabled] = useState<boolean>(false);
+  const { signOut } = useAuthenticator();
 
   useEffect(() => {
     client.models.TtTask.observeQuery().subscribe({
@@ -77,6 +79,15 @@ function Page() {
 
   return (
     <main className="container mx-auto p-4">
+                  <div className="flex justify-end mb-4">
+              <button 
+                onClick={signOut}
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-4 rounded"
+              >
+                Sign out
+              </button>
+            </div>
+
       <h1 className="text-xl mb-4">Task Timer (Prototype)</h1>
       <div id="newTimeForm" className="mb-12">
         <button

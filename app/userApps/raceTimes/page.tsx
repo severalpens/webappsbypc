@@ -11,6 +11,7 @@ import * as Highcharts from "highcharts";
 import chart1Options from "../raceTimes/chart1Options";
 import RaceTimeCreateForm from "../../ui-components/RaceTimeCreateForm";
 import raceTimesSeedData from "./raceTimesSeedData.json";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(outputs);
 
@@ -30,6 +31,8 @@ export default function Page() {
   );
   const chartOptions = chart1Options(raceTimes);
   const [toggleSort, setToggleSort] = useState<boolean>(false);
+  
+  const { signOut } = useAuthenticator();
 
   useEffect(() => {
     const sub = client.models.RaceTime.observeQuery().subscribe({
@@ -74,6 +77,14 @@ export default function Page() {
 
   return (
     <main className="container mx-auto p-4">
+            <div className="flex justify-end mb-4">
+              <button 
+                onClick={signOut}
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-4 rounded"
+              >
+                Sign out
+              </button>
+            </div>
       <section>
         <h1 className="text-xl mb-4">Race Times (Prototype)</h1>
         <div id="newTimeForm" className="mb-12">

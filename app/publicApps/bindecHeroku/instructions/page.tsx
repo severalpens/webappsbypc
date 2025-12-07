@@ -7,12 +7,11 @@ export default function Page() {
   return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex  mb-8">
                 <div></div>
                 <h3 className="text-2xl font-normal">
-                   Instructions
+                   BinDec Instructions
                 </h3>
-                <a href="/" className="text-blue-600 hover:text-blue-800">Home</a>
             </div>
        
             <div className="mb-8">

@@ -148,13 +148,13 @@ export default function Page() {
   }
 
   return (
-    <main className="flex items-center min-h-screen pt-10 pb-10 bg-gray-100">
-      <div className="w-full max-w-sm px-4 mx-auto text-center">
-        <img src="/images/icon.svg" alt="Icon" className="mx-auto mb-4"/>
+    <main className="min-h-screen  pb-10 mx-32">
+          <h1 className="text-2xl mb-3 font-normal">Binary to Decimal Skill Tester</h1>
+          <div><a href="/publicApps/bindecHeroku/instructions" className="text-xl mb-4 font-normal text-blue-600 hover:text-blue-800">Instructions</a></div>
+
+    <div className="flex  ">
+      <div className="w-full max-w-sm px-4 mx-auto">
         <form id="form" onSubmit={handleFormSubmit}>
-          <h1 className="text-2xl mb-3 font-normal">Binary to Decimal</h1>
-          <h1 className="text-xl mb-4 font-normal">Skill Tester</h1>
-          <div><a href="/instructions" className="text-xl mb-4 font-normal text-blue-600 hover:text-blue-800">Instructions</a></div>
           <div className="my-4">
             Level: <select 
               id="difficultyLevel" 
@@ -198,7 +198,9 @@ export default function Page() {
             Submit
           </button>
           <p id="score" className="my-4">Score: {score.correct}/{score.attempts}</p>
-          <p className="text-sm text-left font-semibold mb-2">Result:</p>             
+        </form>
+      </div>
+        <div className="w-full max-w-sm px-4 mx-auto text-center">
           <table id="resultsTable" className="w-full text-left border-collapse">
             <thead>
               <tr>
@@ -223,9 +225,9 @@ export default function Page() {
               </tr>
             </tbody>
           </table>
-          <a className="block text-right mt-4 text-blue-600 hover:text-blue-800" href="https://github.com/severalpens/bindec_heroku">source</a>
-        </form>
-      </div>
+
+        </div>
+        </div>
     </main>
   );
 }

@@ -148,86 +148,143 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen  pb-10 mx-32">
-          <h1 className="text-2xl mb-3 font-normal">Binary to Decimal Skill Tester</h1>
-          <div><a href="/publicApps/bindecHeroku/instructions" className="text-xl mb-4 font-normal text-blue-600 hover:text-blue-800">Instructions</a></div>
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Binary to Decimal Skill Tester</h1>
+          <a 
+            href="/publicApps/bindecHeroku/instructions" 
+            className="inline-flex items-center text-lg font-medium text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            View Instructions
+          </a>
+        </div>
 
-    <div className="flex  ">
-      <div className="w-full max-w-sm px-4 mx-auto">
+    <div className="flex flex-col md:flex-row gap-6 items-start justify-center">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
         <form id="form" onSubmit={handleFormSubmit}>
-          <div className="my-4">
-            Level: <select 
+          <div className="mb-6">
+            <label htmlFor="difficultyLevel" className="block text-sm font-semibold text-slate-700 mb-2">
+              Difficulty Level
+            </label>
+            <select 
               id="difficultyLevel" 
-              className="ml-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-700 font-medium transition-all"
               onChange={handleDifficultyChange}
             >
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
+              <option value="Easy">🟢 Easy (1-15)</option>
+              <option value="Medium">🟡 Medium (16-240)</option>
+              <option value="Hard">🔴 Hard (1-255)</option>
             </select>
           </div>
-          <progress 
-            id="progressBar" 
-            className="w-full my-4"
-            value={progressValue}
-            max={timeoutSeconds}
-          ></progress>
+          <div className="mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-semibold text-slate-700">Time Remaining</span>
+              <span className="text-sm font-bold text-slate-600">{progressValue}s</span>
+            </div>
+            <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+              <div 
+                className={`h-full rounded-full transition-all duration-1000 ${
+                  progressValue > 10 ? 'bg-green-500' : 
+                  progressValue > 5 ? 'bg-yellow-500' : 'bg-red-500'
+                }`}
+                style={{ width: `${(progressValue / timeoutSeconds) * 100}%` }}
+              ></div>
+            </div>
+          </div>
           <button 
             type="button" 
             id="pause" 
-            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 my-4"
+            className="w-full px-4 py-3 bg-slate-600 text-white rounded-lg hover:bg-slate-700 font-semibold transition-colors mb-6 shadow-md"
             onClick={handlePauseClick}
           >
-            {paused ? "Resume" : "Pause"}
+            {paused ? "▶️ Resume" : "⏸️ Pause"}
           </button>
-          <h1 id="bits" className="text-2xl mb-3 font-normal">{bits}</h1>
-          <label htmlFor="responseInput" className="sr-only">Decimal:</label>
-          <input 
-            type="number" 
-            id="responseInput" 
-            className={`w-full px-3 py-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:z-10 my-4 ${inputClass}`}
-            autoFocus
-            value={responseInput}
-            onChange={(e) => setResponseInput(e.target.value)}
-          />
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-6 border-2 border-blue-200">
+            <label className="block text-sm font-semibold text-slate-600 mb-3 text-center">Convert this binary:</label>
+            <h1 id="bits" className="text-3xl md:text-4xl font-mono font-bold text-center text-slate-800 tracking-wider">{bits}</h1>
+          </div>
+          <div className="mb-6">
+            <label htmlFor="responseInput" className="block text-sm font-semibold text-slate-700 mb-2">
+              Your Answer (Decimal)
+            </label>
+            <input 
+              type="number" 
+              id="responseInput" 
+              className={`w-full px-4 py-4 text-2xl font-bold border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${inputClass === 'success' ? 'border-green-500 bg-green-50' : inputClass === 'failure' ? 'border-red-500 bg-red-50' : 'border-slate-300 bg-white'}`}
+              autoFocus
+              placeholder="Enter decimal value"
+              value={responseInput}
+              onChange={(e) => setResponseInput(e.target.value)}
+            />
+          </div>
           <button 
             id="responseSubmit" 
-            className="w-full px-4 py-3 text-lg bg-blue-600 text-white rounded-md hover:bg-blue-700 my-4" 
+            className="w-full px-6 py-4 text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]" 
             type="submit"
           >
-            Submit
+            Submit Answer ✓
           </button>
-          <p id="score" className="my-4">Score: {score.correct}/{score.attempts}</p>
+          <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <p className="text-center">
+              <span className="text-sm font-semibold text-slate-600">Score: </span>
+              <span className="text-2xl font-bold text-blue-600">{score.correct}</span>
+              <span className="text-xl text-slate-400">/</span>
+              <span className="text-2xl font-bold text-slate-700">{score.attempts}</span>
+              {score.attempts > 0 && (
+                <span className="ml-3 text-sm font-semibold text-slate-500">
+                  ({Math.round((score.correct / score.attempts) * 100)}%)
+                </span>
+              )}
+            </p>
+          </div>
         </form>
+        </div>
       </div>
-        <div className="w-full max-w-sm px-4 mx-auto text-center">
-          <table id="resultsTable" className="w-full text-left border-collapse">
-            <thead>
-              <tr>
-              </tr>
-            </thead>
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+            <h2 className="text-2xl font-bold text-slate-800 mb-6 text-center">Last Result</h2>
+          <table id="resultsTable" className="w-full border-collapse">
             <tbody>
-              <tr className="border-b">
-                <th scope="row" className="py-2"><p>Result</p></th>
-                <td className="py-2"><p id="submittedResult" className="text-right">{submittedResult}</p></td>
+              <tr className="border-b border-slate-200">
+                <th scope="row" className="py-4 text-left font-semibold text-slate-600">Result</th>
+                <td className="py-4 text-right">
+                  <span id="submittedResult" className={`px-4 py-2 rounded-full font-bold ${
+                    submittedResult === 'Correct' ? 'bg-green-100 text-green-700' : 
+                    submittedResult === 'Incorrect' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'
+                  }`}>
+                    {submittedResult}
+                  </span>
+                </td>
               </tr>
-              <tr className="border-b">
-                <th scope="row" className="py-2"><p>Binary</p></th>
-                <td className="py-2"><p id="submittedBinary" className="text-right">{submittedBinary}</p></td>
+              <tr className="border-b border-slate-200">
+                <th scope="row" className="py-4 text-left font-semibold text-slate-600">Binary</th>
+                <td className="py-4 text-right">
+                  <p id="submittedBinary" className="font-mono text-lg font-bold text-slate-800">{submittedBinary}</p>
+                </td>
               </tr>
-              <tr className="border-b">
-                <th scope="row" className="py-2"><p>Decimal</p></th>
-                <td className="py-2"><p id="submittedDecimal" className="text-right">{submittedDecimal}</p></td>
+              <tr className="border-b border-slate-200">
+                <th scope="row" className="py-4 text-left font-semibold text-slate-600">Decimal</th>
+                <td className="py-4 text-right">
+                  <p id="submittedDecimal" className="text-lg font-bold text-blue-600">{submittedDecimal}</p>
+                </td>
               </tr>
-              <tr className="border-b">
-                <th scope="row" className="py-2"><p>Response</p></th>
-                <td className="py-2"><p id="submittedResponse" className="text-right">{submittedResponse}</p></td>
+              <tr>
+                <th scope="row" className="py-4 text-left font-semibold text-slate-600">Your Answer</th>
+                <td className="py-4 text-right">
+                  <p id="submittedResponse" className="text-lg font-bold text-slate-800">{submittedResponse}</p>
+                </td>
               </tr>
             </tbody>
           </table>
-
+          </div>
         </div>
         </div>
+      </div>
     </main>
   );
 }

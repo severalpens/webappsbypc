@@ -13,7 +13,7 @@ export default function App() {
       <div className="text-center mt-32 py-10 px-6">
         <h1 className="text-4xl font-bold mt-0 mb-6">Paul Collins</h1>
         <h3 className="text-2xl font-bold mb-4">
-          IBM Data Engineer | Web Developer
+          Data Engineering | Data Analytics | Web Development
         </h3>
       </div>
       <div className="text-center flex justify-center m-2">

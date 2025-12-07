@@ -148,7 +148,7 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
+    <main className="min-h-screen  py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Binary to Decimal Skill Tester</h1>

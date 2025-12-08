@@ -68,6 +68,23 @@ export default function Page() {
                     Convert binary numbers to decimal.
                   </Link>
                 </td>
+              </tr>              
+              <tr className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-6 py-4">
+                  <Link href="/publicApps/route21" className="block font-medium text-blue-600 hover:text-blue-800">
+                    Route 21
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/publicApps/route21" className="block text-gray-700">
+                    Public app (no log in required)
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/publicApps/route21" className="block text-gray-600">
+                    Bus timetable for Ballarat Route 21.
+                  </Link>
+                </td>
               </tr>
             </tbody>
           </table>

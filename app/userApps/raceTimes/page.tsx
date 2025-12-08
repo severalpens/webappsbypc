@@ -76,10 +76,10 @@ export default function Page() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200">
       <div className="container mx-auto p-6 md:p-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
             Race Times
           </h1>
           <button
@@ -93,7 +93,7 @@ export default function Page() {
           <div id="newTimeForm" className="mb-12">
             <button
               onClick={() => setShowForm(!showForm)}
-              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
+              className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
             >
               {showForm ? "Hide New Time Form" : "Add New Time"}
             </button>
@@ -105,7 +105,7 @@ export default function Page() {
           </div>
           <button
             onClick={toggleShowTable}
-            className="mb-6 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
+            className="mb-6 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
           >
             {showTable ? "Hide Table" : "Show Table"}
           </button>
@@ -136,7 +136,7 @@ export default function Page() {
             </div>
             <div className="overflow-x-auto rounded-xl shadow-lg">
               <table id="raceTimesTable" className="table-auto w-full bg-white">
-                <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                <thead className="bg-gradient-to-r from-slate-700 to-slate-800 text-white">
                   <tr>
                     <th className="px-6 py-4 text-left font-semibold">
                       Race Distance
@@ -187,7 +187,7 @@ export default function Page() {
                     .map((raceTime) => (
                       <tr
                         key={raceTime.id}
-                        className="hover:bg-blue-50 transition-colors duration-200"
+                        className="hover:bg-slate-50 transition-colors duration-200"
                       >
                         <td className="px-6 py-4 text-gray-800">
                           {raceTime.RaceDistance}
@@ -233,7 +233,7 @@ export default function Page() {
           <div className="mt-8" id="chart">
             <button
               onClick={toggleChart}
-              className="mb-6 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
+              className="mb-6 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
             >
               {showChart ? "Hide Chart" : "Show Chart"}
             </button>

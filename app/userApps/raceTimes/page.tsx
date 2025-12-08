@@ -82,18 +82,43 @@ export default function Page() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
             Race Times
           </h1>
+          <div>
+                          <button
+                id="seedRaceTimes"
+                onClick={seedRaceTimes}
+                className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 mx-2"
+                hidden
+              >
+                Seed Data
+              </button>
+
+                    <button
+            onClick={toggleShowTable}
+            className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+          >
+            {showTable ? "Hide Table" : "Show Table"}
+          </button>
+                      <button
+              onClick={toggleChart}
+              className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 mx-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              {showChart ? "Hide Chart" : "Show Chart"}
+            </button>
+
+
           <button
             onClick={signOut}
             className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
           >
             Sign out
           </button>
+          </div>
         </div>
         <section className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
           <div id="newTimeForm" className="mb-12">
             <button
               onClick={() => setShowForm(!showForm)}
-              className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
+              className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               {showForm ? "Hide New Time Form" : "Add New Time"}
             </button>
@@ -103,12 +128,6 @@ export default function Page() {
               </div>
             )}
           </div>
-          <button
-            onClick={toggleShowTable}
-            className="mb-6 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
-          >
-            {showTable ? "Hide Table" : "Show Table"}
-          </button>
           <div hidden={!showTable}>
             <div className="flex flex-wrap gap-3 justify-end mb-6">
               <button
@@ -119,16 +138,9 @@ export default function Page() {
                 Sort {toggleSort ? "↓" : "↑"}
               </button>
               <button
-                id="seedRaceTimes"
-                onClick={seedRaceTimes}
-                className="bg-white border-2 border-slate-300 hover:border-slate-400 hover:bg-slate-50 text-slate-700 font-medium px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm"
-              >
-                Seed Data
-              </button>
-              <button
                 id="deleteSelectedButton"
                 onClick={() => deleteAllRaceTimes()}
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white font-medium px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-sm"
+                className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                 disabled={selectedRaceTimeIDs.length === 0}
               >
                 Delete Selected
@@ -231,12 +243,6 @@ export default function Page() {
             </div>
           </div>
           <div className="mt-8" id="chart">
-            <button
-              onClick={toggleChart}
-              className="mb-6 bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 w-64"
-            >
-              {showChart ? "Hide Chart" : "Show Chart"}
-            </button>
             {showChart && (
               <div className="bg-white p-6 rounded-xl shadow-lg">
                 <HighchartsReact

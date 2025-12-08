@@ -1,0 +1,12 @@
+query MyQuery {
+  getRaceTime(id: "74e409bc-5b39-4fff-8bc5-90b3ca8c824c") {
+    id
+    owner
+    RaceDate
+    RaceDistance
+    RaceMins
+    RaceSecs
+    createdAt
+    updatedAt
+  }
+}

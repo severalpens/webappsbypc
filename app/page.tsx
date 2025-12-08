@@ -4,6 +4,7 @@ import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
+import Image from "next/image";
 
 Amplify.configure(outputs);
 
@@ -35,6 +36,29 @@ export default function App() {
         >
           LinkedIn
         </a>
+      </div>
+      <div className="text-center flex justify-center mt-32">
+        <Image
+          src="/Microsoft.png"
+          alt="Paul Collins"
+          width={160}
+          height={120}
+          className="mx-4 rounded-lg shadow-lg"
+        />
+        <Image
+          src="/Databricks.png"
+          alt="Paul Collins"
+          width={160}
+          height={120}
+          className="mx-4 rounded-lg shadow-lg"
+        />
+        <Image
+          src="/AWSCertifiedCloudPractitionerFoundational.png"
+          alt="Paul Collins"
+          width={160}
+          height={120}
+          className="mx-4 rounded-lg shadow-lg"
+        />
       </div>
       <div className="text-center mt-64 py-2 px-6">
         <a href="https://severalpens.com" className="text-gray-500">

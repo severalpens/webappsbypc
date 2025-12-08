@@ -64,6 +64,7 @@ export default function Page() {
                         <tr><td className="border border-gray-300 px-4 py-2">5</td><td className="border border-gray-300 px-4 py-2">32</td></tr>
                         <tr><td className="border border-gray-300 px-4 py-2">6</td><td className="border border-gray-300 px-4 py-2">64</td></tr>
                         <tr><td className="border border-gray-300 px-4 py-2">7</td><td className="border border-gray-300 px-4 py-2">128</td></tr>
+                        <tr><td className="border border-gray-300 px-4 py-2">8</td><td className="border border-gray-300 px-4 py-2">256</td></tr>
                     </tbody>
                 </table>
             </div>

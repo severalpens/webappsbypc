@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { Button, CheckboxField, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createTodo } from "./graphql/mutations";
@@ -19,7 +19,7 @@ export default function TodoCreateForm(props) {
   } = props;
   const initialValues = {
     Name: "",
-    IsCompleted: "",
+    IsCompleted: false,
   };
   const [Name, setName] = React.useState(initialValues.Name);
   const [IsCompleted, setIsCompleted] = React.useState(
@@ -141,17 +141,12 @@ export default function TodoCreateForm(props) {
         hasError={errors.Name?.hasError}
         {...getOverrideProps(overrides, "Name")}
       ></TextField>
-      <TextField
+      <CheckboxField
         label="Is completed"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={IsCompleted}
+        name="IsCompleted"
+        checked={IsCompleted}
         onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+          let value = e.target.checked;
           if (onChange) {
             const modelFields = {
               Name,
@@ -169,7 +164,7 @@ export default function TodoCreateForm(props) {
         errorMessage={errors.IsCompleted?.errorMessage}
         hasError={errors.IsCompleted?.hasError}
         {...getOverrideProps(overrides, "IsCompleted")}
-      ></TextField>
+      />
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

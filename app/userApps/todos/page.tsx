@@ -23,14 +23,14 @@ export default function Page() {
 
   const { signOut } = useAuthenticator();
 
-  // useEffect(() => {
-  //   const sub = client.models.Todo.observeQuery().subscribe({
-  //     next: ({ items }) => {
-  //       setTodos([...items]);
-  //     },
-  //   });
-  //   return () => sub.unsubscribe();
-  // }, []);
+  useEffect(() => {
+    const sub = client.models.Todo.observeQuery().subscribe({
+      next: ({ items }) => {
+        setTodos([...items]);
+      },
+    });
+    return () => sub.unsubscribe();
+  }, []);
 
   function deleteAllTodos() {
     selectedTodoIDs.forEach(async (id) => {

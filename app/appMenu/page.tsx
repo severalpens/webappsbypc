@@ -54,6 +54,23 @@ export default function Page() {
               </tr>
               <tr className="hover:bg-gray-50 transition-colors duration-150">
                 <td className="px-6 py-4">
+                  <Link href="/userApps/todos" className="block font-medium text-blue-600 hover:text-blue-800">
+                    Todo App
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/userApps/todos" className="block text-gray-700">
+                    User app (log in required)
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/userApps/todos" className="block text-gray-600">
+                    Track your tasks and to-dos.
+                  </Link>
+                </td>
+              </tr>
+              <tr className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-6 py-4">
                   <Link href="/publicApps/bindecHeroku" className="block font-medium text-blue-600 hover:text-blue-800">
                     Binary to Decimal
                   </Link>

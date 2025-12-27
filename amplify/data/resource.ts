@@ -33,6 +33,12 @@ const schema = a.schema({
       IsRunning: a.boolean(),
     }).authorization(allow => [allow.owner()]),
 
+  Todo: a
+    .model({
+      Name: a.string(),
+      IsCompleted: a.boolean(),
+    })
+    .authorization((allow) => [allow.owner()]),
 
 
 });

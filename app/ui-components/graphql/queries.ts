@@ -1,31 +1,7 @@
 /* tslint:disable */
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getConsentGiven = /* GraphQL */ `
-  query GetConsentGiven($id: ID!) {
-    getConsentGiven(id: $id) {
-      IsGiven
-      createdAt
-      id
-      owner
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const getContact = /* GraphQL */ `
-  query GetContact($id: ID!) {
-    getContact(id: $id) {
-      Email
-      Message
-      createdAt
-      id
-      owner
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const getRaceTime = /* GraphQL */ `
   query GetRaceTime($id: ID!) {
     getRaceTime(id: $id) {
@@ -41,10 +17,9 @@ export const getRaceTime = /* GraphQL */ `
     }
   }
 `;
-export const getShoppingListItem = /* GraphQL */ `
-  query GetShoppingListItem($id: ID!) {
-    getShoppingListItem(id: $id) {
-      IsCompleted
+export const getSongList = /* GraphQL */ `
+  query GetSongList($id: ID!) {
+    getSongList(id: $id) {
       Name
       createdAt
       id
@@ -95,65 +70,6 @@ export const getTtTaskTimeBlock = /* GraphQL */ `
     }
   }
 `;
-export const getTx = /* GraphQL */ `
-  query GetTx($id: ID!) {
-    getTx(id: $id) {
-      TxAmount
-      TxCategory
-      TxDate
-      TxDateDate
-      TxDateTime
-      TxDescription
-      TxType
-      createdAt
-      id
-      owner
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listConsentGivens = /* GraphQL */ `
-  query ListConsentGivens(
-    $filter: ModelConsentGivenFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listConsentGivens(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        IsGiven
-        createdAt
-        id
-        owner
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listContacts = /* GraphQL */ `
-  query ListContacts(
-    $filter: ModelContactFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        Email
-        Message
-        createdAt
-        id
-        owner
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const listRaceTimes = /* GraphQL */ `
   query ListRaceTimes(
     $filter: ModelRaceTimeFilterInput
@@ -177,19 +93,14 @@ export const listRaceTimes = /* GraphQL */ `
     }
   }
 `;
-export const listShoppingListItems = /* GraphQL */ `
-  query ListShoppingListItems(
-    $filter: ModelShoppingListItemFilterInput
+export const listSongLists = /* GraphQL */ `
+  query ListSongLists(
+    $filter: ModelSongListFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listShoppingListItems(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listSongLists(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        IsCompleted
         Name
         createdAt
         id
@@ -260,28 +171,6 @@ export const listTtTasks = /* GraphQL */ `
         IsRunning
         ProjectName
         TaskName
-        createdAt
-        id
-        owner
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listTxes = /* GraphQL */ `
-  query ListTxes($filter: ModelTxFilterInput, $limit: Int, $nextToken: String) {
-    listTxes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        TxAmount
-        TxCategory
-        TxDate
-        TxDateDate
-        TxDateTime
-        TxDescription
-        TxType
         createdAt
         id
         owner

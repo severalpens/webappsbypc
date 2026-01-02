@@ -1,20 +1,16 @@
 /* eslint-disable */
 "use client";
 import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SwitchField,
-  TextField,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createTodo } from "./graphql/mutations";
+import { getSongList } from "./graphql/queries";
+import { updateSongList } from "./graphql/mutations";
 const client = generateClient();
-export default function TodoCreateForm(props) {
+export default function SongListUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    songList: songListModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -25,21 +21,34 @@ export default function TodoCreateForm(props) {
   } = props;
   const initialValues = {
     Name: "",
-    IsCompleted: false,
   };
   const [Name, setName] = React.useState(initialValues.Name);
-  const [IsCompleted, setIsCompleted] = React.useState(
-    initialValues.IsCompleted
-  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.Name);
-    setIsCompleted(initialValues.IsCompleted);
+    const cleanValues = songListRecord
+      ? { ...initialValues, ...songListRecord }
+      : initialValues;
+    setName(cleanValues.Name);
     setErrors({});
   };
+  const [songListRecord, setSongListRecord] = React.useState(songListModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await client.graphql({
+              query: getSongList.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getSongList
+        : songListModelProp;
+      setSongListRecord(record);
+    };
+    queryData();
+  }, [idProp, songListModelProp]);
+  React.useEffect(resetStateValues, [songListRecord]);
   const validations = {
     Name: [],
-    IsCompleted: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -67,8 +76,7 @@ export default function TodoCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          Name,
-          IsCompleted,
+          Name: Name ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -99,18 +107,16 @@ export default function TodoCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createTodo.replaceAll("__typename", ""),
+            query: updateSongList.replaceAll("__typename", ""),
             variables: {
               input: {
+                id: songListRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -119,7 +125,7 @@ export default function TodoCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "TodoCreateForm")}
+      {...getOverrideProps(overrides, "SongListUpdateForm")}
       {...rest}
     >
       <TextField
@@ -132,7 +138,6 @@ export default function TodoCreateForm(props) {
           if (onChange) {
             const modelFields = {
               Name: value,
-              IsCompleted,
             };
             const result = onChange(modelFields);
             value = result?.Name ?? value;
@@ -147,43 +152,19 @@ export default function TodoCreateForm(props) {
         hasError={errors.Name?.hasError}
         {...getOverrideProps(overrides, "Name")}
       ></TextField>
-      <SwitchField
-        label="Is completed"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={IsCompleted}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              Name,
-              IsCompleted: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.IsCompleted ?? value;
-          }
-          if (errors.IsCompleted?.hasError) {
-            runValidationTasks("IsCompleted", value);
-          }
-          setIsCompleted(value);
-        }}
-        onBlur={() => runValidationTasks("IsCompleted", IsCompleted)}
-        errorMessage={errors.IsCompleted?.errorMessage}
-        hasError={errors.IsCompleted?.hasError}
-        {...getOverrideProps(overrides, "IsCompleted")}
-      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || songListModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -193,7 +174,10 @@ export default function TodoCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || songListModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

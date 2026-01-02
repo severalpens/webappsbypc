@@ -1,5 +1,6 @@
 import * as React from "react";
 import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { Todo } from "./graphql/types";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -15,28 +16,29 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type TodoCreateFormInputValues = {
+export declare type TodoUpdateFormInputValues = {
     Name?: string;
     IsCompleted?: boolean;
 };
-export declare type TodoCreateFormValidationValues = {
+export declare type TodoUpdateFormValidationValues = {
     Name?: ValidationFunction<string>;
     IsCompleted?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type TodoCreateFormOverridesProps = {
-    TodoCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type TodoUpdateFormOverridesProps = {
+    TodoUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     Name?: PrimitiveOverrideProps<TextFieldProps>;
     IsCompleted?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
-export declare type TodoCreateFormProps = React.PropsWithChildren<{
-    overrides?: TodoCreateFormOverridesProps | undefined | null;
+export declare type TodoUpdateFormProps = React.PropsWithChildren<{
+    overrides?: TodoUpdateFormOverridesProps | undefined | null;
 } & {
-    clearOnSuccess?: boolean;
-    onSubmit?: (fields: TodoCreateFormInputValues) => TodoCreateFormInputValues;
-    onSuccess?: (fields: TodoCreateFormInputValues) => void;
-    onError?: (fields: TodoCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: TodoCreateFormInputValues) => TodoCreateFormInputValues;
-    onValidate?: TodoCreateFormValidationValues;
+    id?: string;
+    todo?: Todo;
+    onSubmit?: (fields: TodoUpdateFormInputValues) => TodoUpdateFormInputValues;
+    onSuccess?: (fields: TodoUpdateFormInputValues) => void;
+    onError?: (fields: TodoUpdateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: TodoUpdateFormInputValues) => TodoUpdateFormInputValues;
+    onValidate?: TodoUpdateFormValidationValues;
 } & React.CSSProperties>;
-export default function TodoCreateForm(props: TodoCreateFormProps): React.ReactElement;
+export default function TodoUpdateForm(props: TodoUpdateFormProps): React.ReactElement;

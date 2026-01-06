@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-export default function LandingWebAppsByPC() {
+export default function LandingBuninyongTech() {
   return (
 <>
       <div className="text-center pt-20 md:pt-32 py-10 px-6">

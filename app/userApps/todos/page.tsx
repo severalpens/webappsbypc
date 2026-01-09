@@ -8,6 +8,7 @@ import outputs from "@/amplify_outputs.json";
 import { useRef } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import TodoCreateForm from "@/app/ui-components/TodoCreateForm";
+import TodoUpdateForm from "@/app/ui-components/TodoUpdateForm";
 
 Amplify.configure(outputs);
 
@@ -20,6 +21,7 @@ export default function Page() {
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
   const [selectedTodoIDs, setSelectedTodoIDs] = useState<Array<string>>([]);
   const [toggleSort, setToggleSort] = useState<boolean>(false);
+  const [editingTodoId, setEditingTodoId] = useState<string | null>(null);
 
   const { signOut } = useAuthenticator();
 
@@ -84,6 +86,27 @@ export default function Page() {
               </div>
             )}
           </div>
+          {editingTodoId && (
+            <div id="editTodoForm" className="mb-12">
+              <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6 shadow-md">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-semibold text-blue-900">
+                    Edit Todo
+                  </h2>
+                  <button
+                    onClick={() => setEditingTodoId(null)}
+                    className="bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <TodoUpdateForm
+                  id={editingTodoId}
+                  onSuccess={() => setEditingTodoId(null)}
+                />
+              </div>
+            </div>
+          )}
           <div hidden={!showTable}>
             <div className="flex flex-wrap gap-3 justify-end mb-6">
               <button
@@ -114,6 +137,9 @@ export default function Page() {
                     </th>
                     <th className="px-6 py-4 text-left font-semibold">
                       Created At
+                    </th>
+                    <th className="px-6 py-4 text-center font-semibold">
+                      Actions
                     </th>
                     <th className="px-6 py-4 text-center font-semibold">
                       <input
@@ -175,6 +201,14 @@ export default function Page() {
                           {todo.createdAt
                             ? new Date(todo.createdAt).toLocaleString()
                             : "N/A"}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <button
+                            onClick={() => setEditingTodoId(todo.id)}
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm"
+                          >
+                            Edit
+                          </button>
                         </td>
                         <td className="px-6 py-4 text-center">
                           <input

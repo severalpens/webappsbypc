@@ -1,6 +1,6 @@
 "use client";
 
-import "./App.css";
+// import "./App.css";
 
 import { useEffect, useState } from "react";
 import TimeCalculator from "./TimeCalculator";
@@ -23,8 +23,8 @@ export default function Page() {
   });
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="text-center">
+      <header className="min-h-screen bg-slate-800 text-white flex flex-col items-center justify-center">
         <h2 className="text-4xl m-8">Route 21</h2>
         <p className="mb-4">
           Next Bus based on{" "}
@@ -32,38 +32,39 @@ export default function Page() {
             href="https://www.ptv.vic.gov.au/route/15169/21-ballarat-station-buninyong-via-federation-university/"
             target="_blank"
             rel="noreferrer"
+            className="text-cyan-400"
           >
             timetable
           </a>
         </p>
-        <table>
+        <table className="border-collapse border border-gray-400">
           <thead>
-            <tr>
-              <th className="c1">Bus Stop</th>
-              <th className="c2">Direction</th>
-              <th className="c3">Next</th>
+            <tr className="border border-gray-400">
+              <th className="w-80 text-left p-5 border border-gray-400">Bus Stop</th>
+              <th className="w-40 text-left p-5 border border-gray-400">Direction</th>
+              <th className="w-24 text-right p-5 border border-gray-400">Next</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="c1">Buninyong (terminus)</td>
-              <td className="c2">Inbound</td>
-              <td className="c3">{buninyong}</td>
+            <tr className="border border-gray-400">
+              <td className="w-80 text-left p-5 border border-gray-400">Buninyong (terminus)</td>
+              <td className="w-40 text-left p-5 border border-gray-400">Inbound</td>
+              <td className="w-24 text-right p-5 border border-gray-400">{buninyong}</td>
             </tr>
-            <tr>
-              <td className="c1">Fed Uni</td>
-              <td className="c2">Inbound</td>
-              <td className="c3">{fedUniInbound}</td>
+            <tr className="border border-gray-400">
+              <td className="w-80 text-left p-5 border border-gray-400">Fed Uni</td>
+              <td className="w-40 text-left p-5 border border-gray-400">Inbound</td>
+              <td className="w-24 text-right p-5 border border-gray-400">{fedUniInbound}</td>
             </tr>
-            <tr>
-              <td className="c1">Fed Uni</td>
-              <td className="c2">Outbound</td>
-              <td className="c3">{fedUniOutbound}</td>
+            <tr className="border border-gray-400">
+              <td className="w-80 text-left p-5 border border-gray-400">Fed Uni</td>
+              <td className="w-40 text-left p-5 border border-gray-400">Outbound</td>
+              <td className="w-24 text-right p-5 border border-gray-400">{fedUniOutbound}</td>
             </tr>
-            <tr>
-              <td className="c1">Ballarat Interchange</td>
-              <td className="c2">Outbound</td>
-              <td className="c3">{ballarat}</td>
+            <tr className="border border-gray-400">
+              <td className="w-80 text-left p-5 border border-gray-400">Ballarat Interchange</td>
+              <td className="w-40 text-left p-5 border border-gray-400">Outbound</td>
+              <td className="w-24 text-right p-5 border border-gray-400">{ballarat}</td>
             </tr>
           </tbody>
         </table>
@@ -72,9 +73,9 @@ export default function Page() {
           <div>{new NextRecycleBinDay().GetDaysToNextRecycleBinDay()} days</div>
           <div>({new NextRecycleBinDay().GetNextRecycleBinDay()})</div>
         </div>
-        <footer>
+        <footer className="pt-24 text-sm">
           <p>
-            by <a href="https://webappsbypc.com">webappsbypc.com</a>
+            by <a href="https://webappsbypc.com" className="inherit">webappsbypc.com</a>
           </p>
         </footer>
       </header>

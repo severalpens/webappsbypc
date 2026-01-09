@@ -1,7 +1,13 @@
 /* eslint-disable */
 "use client";
 import * as React from "react";
-import { Button, CheckboxField, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createTodo } from "./graphql/mutations";
@@ -141,10 +147,11 @@ export default function TodoCreateForm(props) {
         hasError={errors.Name?.hasError}
         {...getOverrideProps(overrides, "Name")}
       ></TextField>
-      <CheckboxField
+      <SwitchField
         label="Is completed"
-        name="IsCompleted"
-        checked={IsCompleted}
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={IsCompleted}
         onChange={(e) => {
           let value = e.target.checked;
           if (onChange) {
@@ -164,7 +171,7 @@ export default function TodoCreateForm(props) {
         errorMessage={errors.IsCompleted?.errorMessage}
         hasError={errors.IsCompleted?.hasError}
         {...getOverrideProps(overrides, "IsCompleted")}
-      />
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

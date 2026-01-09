@@ -18,10 +18,10 @@ export default function RaceTimeCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    RaceDate: "",
-    RaceDistance: "",
-    RaceMins: "",
-    RaceSecs: "",
+    RaceDate: new Date().toISOString().split('T')[0],
+    RaceDistance: "400",
+    RaceMins: "8",
+    RaceSecs: "30",
   };
   const [RaceDate, setRaceDate] = React.useState(initialValues.RaceDate);
   const [RaceDistance, setRaceDistance] = React.useState(
@@ -185,68 +185,78 @@ export default function RaceTimeCreateForm(props) {
         hasError={errors.RaceDistance?.hasError}
         {...getOverrideProps(overrides, "RaceDistance")}
       ></TextField>
-      <TextField
-        label="Race mins"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={RaceMins}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              RaceDate,
-              RaceDistance,
-              RaceMins: value,
-              RaceSecs,
-            };
-            const result = onChange(modelFields);
-            value = result?.RaceMins ?? value;
-          }
-          if (errors.RaceMins?.hasError) {
-            runValidationTasks("RaceMins", value);
-          }
-          setRaceMins(value);
-        }}
-        onBlur={() => runValidationTasks("RaceMins", RaceMins)}
-        errorMessage={errors.RaceMins?.errorMessage}
-        hasError={errors.RaceMins?.hasError}
-        {...getOverrideProps(overrides, "RaceMins")}
-      ></TextField>
-      <TextField
-        label="Race secs"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={RaceSecs}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              RaceDate,
-              RaceDistance,
-              RaceMins,
-              RaceSecs: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.RaceSecs ?? value;
-          }
-          if (errors.RaceSecs?.hasError) {
-            runValidationTasks("RaceSecs", value);
-          }
-          setRaceSecs(value);
-        }}
-        onBlur={() => runValidationTasks("RaceSecs", RaceSecs)}
-        errorMessage={errors.RaceSecs?.errorMessage}
-        hasError={errors.RaceSecs?.hasError}
-        {...getOverrideProps(overrides, "RaceSecs")}
-      ></TextField>
+
+<div className="flex gap-2 items-end">
+        <div className="w-20">
+          <TextField
+            label="Race Time"
+            isRequired={false}
+            isReadOnly={false}
+            type="number"
+            step="any"
+            value={RaceMins}
+            placeholder="mm"
+            onChange={(e) => {
+              let value = isNaN(parseInt(e.target.value))
+                ? e.target.value
+                : parseInt(e.target.value);
+              if (onChange) {
+                const modelFields = {
+                  RaceDate,
+                  RaceDistance,
+                  RaceMins: value,
+                  RaceSecs,
+                };
+                const result = onChange(modelFields);
+                value = result?.RaceMins ?? value;
+              }
+              if (errors.RaceMins?.hasError) {
+                runValidationTasks("RaceMins", value);
+              }
+              setRaceMins(value);
+            }}
+            onBlur={() => runValidationTasks("RaceMins", RaceMins)}
+            errorMessage={errors.RaceMins?.errorMessage}
+            hasError={errors.RaceMins?.hasError}
+            {...getOverrideProps(overrides, "RaceMins")}
+          ></TextField>
+        </div>
+        <span className="text-lg pb-2">:</span>
+        <div className="w-20">
+          <TextField
+            label=""
+            isRequired={false}
+            isReadOnly={false}
+            type="number"
+            step="any"
+            placeholder="ss"
+            value={RaceSecs}
+            onChange={(e) => {
+              let value = isNaN(parseInt(e.target.value))
+                ? e.target.value
+                : parseInt(e.target.value);
+              if (onChange) {
+                const modelFields = {
+                  RaceDate,
+                  RaceDistance,
+                  RaceMins,
+                  RaceSecs: value,
+                };
+                const result = onChange(modelFields);
+                value = result?.RaceSecs ?? value;
+              }
+              if (errors.RaceSecs?.hasError) {
+                runValidationTasks("RaceSecs", value);
+              }
+              setRaceSecs(value);
+            }}
+            onBlur={() => runValidationTasks("RaceSecs", RaceSecs)}
+            errorMessage={errors.RaceSecs?.errorMessage}
+            hasError={errors.RaceSecs?.hasError}
+            {...getOverrideProps(overrides, "RaceSecs")}
+          ></TextField>
+        </div>
+</div>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

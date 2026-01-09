@@ -11,7 +11,7 @@ export default function LandingBuninyongTech() {
 <>
       <div className="text-center pt-20 md:pt-32 py-10 px-6">
         <h1 className="text-5xl md:text-6xl font-bold mt-0 mb-6 text-slate-700">
-          Web Apps by Paul Collins
+          Buninyong Tech Web Apps
         </h1>
         <h3 className="text-xl md:text-2xl font-semibold mb-4 text-gray-700">
           Custom built web applications for capturing and analyzing data 
@@ -19,13 +19,7 @@ export default function LandingBuninyongTech() {
       </div>
       <div className="text-center flex flex-wrap justify-center gap-4 m-2 px-4">
         <a
-          href="https://github.com/severalpens"
-          className="bg-white border-2 border-gray-300 hover:border-gray-900 px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 hover:bg-gray-70"
-        >
-          Github
-        </a>
-        <a
-          href="https://www.youtube.com/channel/UCuFhL_mEedCp4FDpIrSS9gA"
+          href=""
           className="bg-white border-2 border-gray-300 hover:border-gray-600 px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 hover:bg-gray-70"
         >
           Youtube

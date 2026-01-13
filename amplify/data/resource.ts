@@ -40,6 +40,14 @@ const schema = a.schema({
     })
     .authorization((allow) => [allow.owner()]),
 
+    Transaction: a
+    .model({
+      Src: a.string(),
+      TxDate: a.date(),
+      Amount: a.float(),
+      Description: a.string(),
+    })
+    .authorization((allow) => [allow.owner()]),
 
 });
 

@@ -236,7 +236,25 @@ export default function Page() {
                 onClick={async () => {
                   setIsUploading(true);
                   try {
+                    let skippedCount = 0;
                     for (const row of csvData) {
+                      // Check if transaction with same txDate, Amount, and Description already exists
+                      const { data: existingTransactions } = await client.models.Transaction.list({
+                        filter: {
+                          and: [
+                            { TxDate: { eq: row.txDate } },
+                            { Amount: { eq: parseFloat(row.amount) } },
+                            { Description: { eq: row.description } },
+                          ],
+                        },
+                      });
+
+                      // Skip if duplicate found
+                      if (existingTransactions && existingTransactions.length > 0) {
+                        skippedCount++;
+                        continue;
+                      }
+
                       await client.models.Transaction.create({
                         TxDate: row.txDate,
                         Amount: parseFloat(row.amount),
@@ -244,6 +262,9 @@ export default function Page() {
                       });
                     }
                     clearPreview();
+                    if (skippedCount > 0) {
+                      alert(`Upload complete! ${skippedCount} duplicate transaction(s) were skipped.`);
+                    }
                   } finally {
                     setIsUploading(false);
                   }

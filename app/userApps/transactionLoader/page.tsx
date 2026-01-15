@@ -34,6 +34,11 @@ export default function Page() {
 
   const { signOut } = useAuthenticator();
 
+  
+client.queries.sayHello({
+  name: "Amplify",
+})
+
   const parseCSV = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -164,6 +169,19 @@ export default function Page() {
           </div>
         </div>
         <section className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4">Say Hello</h2>
+          <button
+            onClick={async () => {
+              const response = await client.queries.sayHello({ name: "User" });
+              alert(response);
+            }}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            Say Hello
+          </button>
+
+        </div>
         <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-800 mb-4">
               Bank / Institution

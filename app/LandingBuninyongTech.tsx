@@ -10,9 +10,42 @@ export default function LandingBuninyongTech() {
   return (
     <>
       <div className="text-center pt-10 md:pt-22 py-10">
-        <svg
-          width="190"
-          height="60"
+
+        <h1 className="text-5xl md:text-6xl font-bold mt-0 mb-6 text-slate-700">
+          Buninyong Tech
+        </h1>
+        <h2 className="text-3xl md:text-4xl font-bold mt-0 mb-5 text-slate-700">
+          Web Apps
+        </h2>
+
+        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-gray-700 italic">
+          Data | Cloud | Automation
+        </h3>
+      </div>
+      <div className="text-center flex flex-wrap justify-center gap-8 m-2 px-4">
+        <div className="flex items-center">
+          <Image
+            src="/Amazon_Web_Services_Logo.svg"
+            alt="Amazon Web Services"
+            width={120}
+            height={120}
+            className="h-20 w-auto mr-20"
+          />
+        </div>
+        <div className="flex items-center">
+          <Image
+            src="/Microsoft_Azure.svg"
+            alt="Microsoft Azure"
+            width={120}
+            height={120}
+            className="h-20 w-auto"
+          />
+        </div>
+      </div>
+            <div className="text-center  py-10 ">
+                <svg
+          width="300"
+          height="100"
           viewBox="0 0 190 60"
           className="mx-auto mb-6"
           xmlns="http://www.w3.org/2000/svg"
@@ -87,38 +120,6 @@ export default function LandingBuninyongTech() {
             strokeLinecap="round"
           />
         </svg>
-        <h1 className="text-5xl md:text-6xl font-bold mt-0 mb-6 text-slate-700">
-          Buninyong Tech
-        </h1>
-        <h2 className="text-3xl md:text-4xl font-bold mt-0 mb-5 text-slate-700">
-          Web Apps
-        </h2>
-        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-gray-700 italic">
-          Data | Cloud | Automation
-        </h3>
-      </div>
-      <div className="text-center flex flex-wrap justify-center gap-8 m-2 px-4">
-        <div className="flex items-center">
-          <Image
-            src="/Amazon_Web_Services_Logo.svg"
-            alt="Amazon Web Services"
-            width={120}
-            height={120}
-            className="h-20 w-auto mr-20"
-          />
-        </div>
-        <div className="flex items-center">
-          <Image
-            src="/Microsoft_Azure.svg"
-            alt="Microsoft Azure"
-            width={120}
-            height={120}
-            className="h-20 w-auto"
-          />
-        </div>
-      </div>
-            <div className="text-center pt-20 md:pt-32 py-10 px-6">
-
               <h5 className="text-xl md:text-2xl font-semibold mb-4 text-gray-700">
           Contact: paul@buninyongtech.com
         </h5>

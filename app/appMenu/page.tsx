@@ -85,6 +85,23 @@ export default function Page() {
                     Track your tasks and to-dos.
                   </Link>
                 </td>
+              </tr>              
+              <tr className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-6 py-4">
+                  <Link href="/userApps/transactionLoader" onClick={handleLinkClick} className="block font-medium text-blue-600 hover:text-blue-800">
+                    Transaction Loader
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/userApps/transactionLoader" onClick={handleLinkClick} className="block text-gray-700">
+                    User app (log in required)
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link href="/userApps/transactionLoader" onClick={handleLinkClick} className="block text-gray-600">
+                    Load transactions from CSV files.
+                  </Link>
+                </td>
               </tr>
               <tr className="hover:bg-gray-50 transition-colors duration-150">
                 <td className="px-6 py-4">
